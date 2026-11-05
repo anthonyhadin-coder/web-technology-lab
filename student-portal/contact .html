@@ -1,0 +1,11 @@
+
+<h2>Contact Us</h2>
+<p>Email: support@studentportal.example</p>
+<p>Phone: +91 98765 43210</p>
+<form name="contactForm" ng-submit="sent=true" novalidate>
+<input ng-model="contact.name" placeholder="Your name" required>
+<input type="email" ng-model="contact.email" placeholder="Your email" required>
+<textarea ng-model="contact.message" placeholder="Your message" required></textarea>
+<button type="submit" ng-disabled="contactForm.$invalid">Send Message</button>
+<p ng-if="sent">Thank you! Your message has been submitted.</p>
+</form>

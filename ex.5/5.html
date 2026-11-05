@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOM and JavaScript Events - Anthony Hadin</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #f3e8ff);
+    color: #1e293b;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px #0002;
+}
+
+header {
+    text-align: center;
+    padding: 15px;
+    color: white;
+    background: linear-gradient(90deg, #1d4ed8, #7e22ce);
+    border-radius: 10px;
+}
+
+header h1 { margin: 5px; font-size: 25px; }
+
+h2 {
+    color: #4338ca;
+    font-size: 18px;
+    margin-top: 0;
+}
+
+section {
+    margin-top: 12px;
+    padding: 12px;
+    background: #f8fafc;
+    border-left: 4px solid #6366f1;
+    border-radius: 8px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+input, select, button {
+    padding: 7px;
+    margin: 4px 2px;
+    max-width: 100%;
+}
+
+input[type="text"], input[type="number"], select {
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+}
+
+button {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover { background: #312e81; }
+
+.result {
+    color: #166534;
+    font-weight: bold;
+}
+
+#garden {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+#garden img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+}
+
+#coin {
+    width: 75px;
+    height: 75px;
+    vertical-align: middle;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 7px;
+    text-align: left;
+}
+
+th { background: #e0e7ff; }
+
+footer {
+    margin-top: 12px;
+    padding: 10px;
+    text-align: center;
+    background: #312e81;
+    color: white;
+    border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+    .grid { grid-template-columns: 1fr; }
+    body { padding: 6px; }
+    .container { padding: 8px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+    <h1>DOM and JavaScript Events</h1>
+    <p>Created by Anthony Hadin</p>
+</header>
+
+<!-- DOM Section -->
+<section>
+    <h2>1. Document Object Model (DOM)</h2>
+    <p id="intro" class="intro">Welcome to my JavaScript practical page.</p>
+    <p class="intro">DOM allows JavaScript to access and change HTML elements.</p>
+
+    <button onclick="findById()">Find by ID</button>
+    <button onclick="findByTag()">Find by Tag</button>
+    <button onclick="findByClass()">Find by Class</button>
+    <button onclick="findBySelector()">Find by Selector</button>
+
+    <p id="domResult" class="result">DOM result appears here.</p>
+</section>
+
+<!-- JavaScript Events -->
+<section>
+    <h2>2. JavaScript Events Demonstration</h2>
+    <button id="clickBtn">Click Event</button>
+    <button id="doubleBtn">Double Click Me</button>
+
+    <p id="eventBox" onmouseover="this.style.background='#bbf7d0'"
+       onmouseout="this.style.background='transparent'">
+       Move your mouse over this paragraph.
+    </p>
+
+    <label for="eventInput">Type something:</label>
+    <input id="eventInput" type="text"
+           onkeydown="showEvent('Key pressed')"
+           onkeyup="showEvent('Key released')"
+           onfocus="showEvent('Input focused')"
+           onblur="showEvent('Input lost focus')">
+
+    <p id="eventResult" class="result">Event result appears here.</p>
+    <p id="mouseResult">Mouse coordinates: move your mouse in this box.</p>
+    <div onmousemove="showMouse(event)"
+         style="height:35px;background:#e0e7ff;padding:8px;">
+         Move mouse here
+    </div>
+</section>
+
+<div class="grid">
+
+<!-- Shortest and Longest Word -->
+<section>
+    <h2>3. Shortest and Longest Word</h2>
+    <input id="sentence" type="text"
+           value="Web Development Tutorial"
+           style="width:95%">
+    <button onclick="findWords()">Find Words</button>
+    <p id="wordResult" class="result"></p>
+</section>
+
+<!-- BMI Calculator -->
+<section>
+    <h2>4. BMI Calculator</h2>
+    <label for="weight">Weight (kg):</label>
+    <input id="weight" type="number" step="any" placeholder="70">
+
+    <label for="height">Height (m):</label>
+    <input id="height" type="number" step="any" placeholder="1.7">
+
+    <button onclick="calculateBMI()">Get BMI</button>
+    <p>BMI: <span id="score" class="result"></span></p>
+    <p>Body type: <span id="type" class="result"></span></p>
+</section>
+
+<!-- Fruit Farm -->
+<section>
+    <h2>5. Fruit Farm</h2>
+    <label for="rows">Rows:</label>
+    <input id="rows" type="number" min="1" max="10" value="3">
+
+    <label for="columns">Columns:</label>
+    <input id="columns" type="number" min="1" max="10" value="4">
+
+    <button onclick="grow()">Plant Garden</button>
+    <div id="garden"></div>
+</section>
+
+<!-- Currency Converter -->
+<section>
+    <h2>6. Currency Converter</h2>
+    <label for="data">Amount:</label>
+    <input id="data" type="number" value="100">
+
+    <select id="from">
+        <option value="INR">Indian Rupee</option>
+        <option value="USD">US Dollar</option>
+    </select>
+
+    <label for="to">Convert to:</label>
+    <select id="to">
+        <option value="USD">US Dollar</option>
+        <option value="INR">Indian Rupee</option>
+    </select>
+
+    <button onclick="convertCurrency()">Convert</button>
+    <p>Answer: <span id="answer" class="result"></span></p>
+    <small>Uses the fixed conversion factors from the lab question.</small>
+</section>
+
+<!-- Coin Flip -->
+<section>
+    <h2>7. Coin Flip</h2>
+    <div>
+        <span id="coin" style="font-size:55px;">🪙</span>
+    </div>
+    <button id="flip">Flip Coin!</button>
+    <p>Heads: <span id="num_heads" class="result">0</span></p>
+    <p>Tails: <span id="num_tails" class="result">0</span></p>
+</section>
+
+<!-- Cake Order -->
+<section>
+    <h2>8. Cake Order Calculator</h2>
+
+    <label for="small">Number of ½ kg cakes (₹100 each):</label>
+    <input type="number" id="small" min="0" value="1">
+
+    <label for="medium">Number of 1 kg cakes (₹200 each):</label>
+    <input type="number" id="medium" min="0" value="1">
+
+    <label for="large">Number of 2 kg cakes (₹400 each):</label>
+    <input type="number" id="large" min="0" value="0">
+
+    <p>Select tip:</p>
+    <label><input type="radio" name="tip" value="10">10%</label>
+    <label><input type="radio" name="tip" value="15" checked>15%</label>
+    <label><input type="radio" name="tip" value="20">20%</label>
+
+    <br>
+    <button id="submitOrder">Calculate Order</button>
+    <p>Total cost: ₹<span id="price" class="result">0.00</span></p>
+</section>
+
+</div>
+
+<!-- DOM Methods Reference -->
+<section>
+    <h2>9. DOM Methods Reference</h2>
+    <table>
+        <tr><th>Method</th><th>Purpose</th></tr>
+        <tr><td>getElementById()</td><td>Find an element by its ID.</td></tr>
+        <tr><td>getElementsByTagName()</td><td>Find elements by tag name.</td></tr>
+        <tr><td>getElementsByClassName()</td><td>Find elements by class name.</td></tr>
+        <tr><td>querySelectorAll()</td><td>Find all elements matching a CSS selector.</td></tr>
+        <tr><td>addEventListener()</td><td>Attach an event handler to an element.</td></tr>
+    </table>
+</section>
+
+<footer>
+    HTML5 DOM and JavaScript Events | Anthony Hadin | 2026
+</footer>
+
+</div>
+
+<script>
+// DOM Selection Methods
+function findById() {
+    document.getElementById("domResult").textContent =
+        document.getElementById("intro").textContent;
+}
+
+function findByTag() {
+    let elements = document.getElementsByTagName("p");
+    document.getElementById("domResult").textContent =
+        "Paragraph elements found: " + elements.length;
+}
+
+function findByClass() {
+    let elements = document.getElementsByClassName("intro");
+    document.getElementById("domResult").textContent =
+        "Elements with intro class: " + elements.length;
+}
+
+function findBySelector() {
+    let elements = document.querySelectorAll("p.intro");
+    document.getElementById("domResult").textContent =
+        "Paragraphs with intro class: " + elements.length;
+}
+
+// Click and Double-click Events
+document.getElementById("clickBtn").addEventListener("click", function() {
+    document.getElementById("eventResult").textContent = "Click event triggered!";
+});
+
+document.getElementById("doubleBtn").addEventListener("dblclick", function() {
+    document.getElementById("eventResult").textContent = "Double-click event triggered!";
+});
+
+function showEvent(message) {
+    document.getElementById("eventResult").textContent = message;
+}
+
+function showMouse(event) {
+    document.getElementById("mouseResult").textContent =
+        "Mouse coordinates: X = " + event.offsetX + ", Y = " + event.offsetY;
+}
+
+// Shortest and Longest Word
+function findWords() {
+    let text = document.getElementById("sentence").value.trim();
+    if (!text) {
+        document.getElementById("wordResult").textContent = "Enter a sentence.";
+        return;
+    }
+
+    let words = text.split(/\s+/);
+    let shortest = words[0];
+    let longest = words[0];
+
+    for (let word of words) {
+        if (word.length < shortest.length) shortest = word;
+        if (word.length > longest.length) longest = word;
+    }
+
+    document.getElementById("wordResult").textContent =
+        "Shortest: " + shortest + " | Longest: " + longest;
+}
+
+// BMI Calculator
+function calculateBMI() {
+    let weight = parseFloat(document.getElementById("weight").value);
+    let height = parseFloat(document.getElementById("height").value);
+
+    if (!(weight > 0) || !(height > 0)) {
+        document.getElementById("score").textContent = "Enter valid values";
+        document.getElementById("type").textContent = "-";
+        return;
+    }
+
+    let bmi = weight / (height * height);
+    let type;
+
+    if (bmi < 18) type = "Underweight";
+    else if (bmi < 25) type = "Normal";
+    else if (bmi < 30) type = "Overweight";
+    else type = "Obese";
+
+    document.getElementById("score").textContent = bmi.toFixed(2);
+    document.getElementById("type").textContent = type;
+}
+
+// Fruit Farm
+function grow() {
+    let rows = Number(document.getElementById("rows").value);
+    let columns = Number(document.getElementById("columns").value);
+    let garden = document.getElementById("garden");
+
+    garden.innerHTML = "";
+
+    if (!Number.isInteger(rows) || !Number.isInteger(columns) ||
+        rows < 1 || columns < 1 || rows > 10 || columns > 10) {
+        garden.textContent = "Enter rows and columns from 1 to 10.";
+        return;
+    }
+
+    for (let i = 0; i < rows * columns; i++) {
+        let fruit = Math.random() < 0.5 ? "apple" : "orange";
+        let img = document.createElement("img");
+        img.src = "https://placehold.co/80x80?text=" +
+                  fruit.charAt(0).toUpperCase() + fruit.slice(1);
+        img.alt = fruit;
+        img.title = fruit;
+        garden.appendChild(img);
+    }
+}
+
+// Currency Converter: fixed lab conversion factors
+function convertCurrency() {
+    let amount = parseFloat(document.getElementById("data").value);
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let result;
+
+    if (!Number.isFinite(amount)) {
+        document.getElementById("answer").textContent = "Enter a valid amount.";
+        return;
+    }
+
+    if (from === to) result = amount;
+    else if (from === "INR" && to === "USD") result = amount * 0.015;
+    else result = amount * 67.12;
+
+    document.getElementById("answer").textContent =
+        result.toFixed(2) + " " + to;
+}
+
+// Coin Flip
+let heads = 0;
+let tails = 0;
+
+document.getElementById("flip").addEventListener("click", function() {
+    let coin = document.getElementById("coin");
+
+    if (Math.random() < 0.5) {
+        heads++;
+        coin.textContent = "🪙 HEADS";
+    } else {
+        tails++;
+        coin.textContent = "🪙 TAILS";
+    }
+
+    document.getElementById("num_heads").textContent = heads;
+    document.getElementById("num_tails").textContent = tails;
+});
+
+// Cake Order Calculator
+document.getElementById("submitOrder").addEventListener("click", function() {
+    let small = Number(document.getElementById("small").value);
+    let medium = Number(document.getElementById("medium").value);
+    let large = Number(document.getElementById("large").value);
+    let tip = Number(document.querySelector('input[name="tip"]:checked').value);
+
+    if ([small, medium, large].some(n => !Number.isFinite(n) || n < 0)) {
+        document.getElementById("price").textContent = "Invalid quantity";
+        return;
+    }
+
+    let subtotal = small * 100 + medium * 200 + large * 400;
+    let afterTax = subtotal * 1.09;
+    let total = afterTax * (1 + tip / 100);
+
+    document.getElementById("price").textContent = total.toFixed(2);
+});
+
+// Document Load Event
+window.addEventListener("load", function() {
+    console.log("DOM and JavaScript Events page loaded.");
+});
+</script>
+
+</body>
+</html>

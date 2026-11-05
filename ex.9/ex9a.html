@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="regApp">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>User Registration</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<style>
+body{font-family:Arial;background:#eef2ff;margin:20px;color:#1e293b}
+form{background:white;max-width:450px;margin:auto;padding:20px;border-radius:12px}
+h2{text-align:center;color:#4338ca}
+label{display:block;margin-top:10px}
+input,select{width:100%;box-sizing:border-box;padding:9px;margin-top:5px;border:1px solid #aaa;border-radius:5px}
+.error{color:#dc2626;font-size:12px}
+button{padding:10px 18px;margin-top:15px;background:#4338ca;color:white;border:0;border-radius:5px}
+button:disabled{background:#999}
+</style>
+</head>
+<body ng-controller="RegCtrl">
+
+<form name="regForm" ng-submit="submitForm()" novalidate>
+<h2>User Registration</h2>
+
+<label>Name</label>
+<input name="name" ng-model="user.name" required
+       ng-pattern="/^[A-Za-z ]+$/" placeholder="Enter your name">
+<div class="error" ng-if="regForm.name.$touched && regForm.name.$error.required">Name is required.</div>
+<div class="error" ng-if="regForm.name.$touched && regForm.name.$error.pattern">Name must not contain numbers or special characters.</div>
+
+<label>Password</label>
+<input type="password" name="password" ng-model="user.password" required
+       ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/"
+       placeholder="Minimum 8 characters">
+<div class="error" ng-if="regForm.password.$touched && regForm.password.$invalid">
+Password needs 8 characters, uppercase, lowercase and a number.
+</div>
+
+<label>Age</label>
+<input type="number" name="age" ng-model="user.age" min="18" max="30" required>
+<div class="error" ng-if="regForm.age.$touched && regForm.age.$invalid">
+Age must be between 18 and 30.
+</div>
+
+<label>Mobile Number</label>
+<input name="mobile" ng-model="user.mobile" ng-pattern="/^[0-9]{10}$/"
+       required maxlength="10" placeholder="10-digit mobile number">
+<div class="error" ng-if="regForm.mobile.$touched && regForm.mobile.$invalid">
+Enter a valid 10-digit mobile number.
+</div>
+
+<label>Email</label>
+<input type="email" name="email" ng-model="user.email" required placeholder="name@example.com">
+<div class="error" ng-if="regForm.email.$touched && regForm.email.$invalid">
+Enter a valid email address.
+</div>
+
+<label>Gender</label>
+<select name="gender" ng-model="user.gender" required>
+<option value="">Select gender</option>
+<option>Male</option><option>Female</option><option>Other</option>
+</select>
+<div class="error" ng-if="regForm.gender.$touched && regForm.gender.$invalid">Select your gender.</div>
+
+<label>State</label>
+<select name="state" ng-model="user.state" required>
+<option value="">Select state</option>
+<option>Tamil Nadu</option><option>Kerala</option>
+<option>Karnataka</option><option>Andhra Pradesh</option>
+<option>Telangana</option><option>Other</option>
+</select>
+<div class="error" ng-if="regForm.state.$touched && regForm.state.$invalid">Select your state.</div>
+
+<button type="submit" ng-disabled="regForm.$invalid">Register</button>
+<p>{{message}}</p>
+</form>
+
+<script>
+angular.module("regApp", [])
+.controller("RegCtrl", function($scope) {
+  $scope.user = {};
+  $scope.submitForm = function() {
+    $scope.message = "Registration submitted successfully!";
+  };
+});
+</script>
+</body>
+</html>

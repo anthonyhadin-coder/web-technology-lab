@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>jQuery Practical</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+body{font-family:Arial;background:#eef2ff;margin:15px;color:#172554}
+h1{text-align:center;color:#4338ca}
+section{background:white;padding:15px;margin:12px auto;border-radius:12px;max-width:650px}
+input,select,button{padding:8px;margin:5px;border:1px solid #aaa;border-radius:5px}
+button{background:#4338ca;color:white;cursor:pointer}
+.result{background:#e0e7ff;padding:10px;margin-top:10px}
+#car{width:220px;height:75px;margin:20px auto;position:relative}
+.body{background:red;width:190px;height:40px;position:absolute;top:20px;left:15px;border-radius:35px 45px 10px 10px}
+.glass{background:lightblue;width:65px;height:22px;position:absolute;top:24px;left:85px;border-radius:12px 20px 0 0}
+.wheel{background:#222;width:35px;height:35px;border-radius:50%;position:absolute;top:48px}
+.w1{left:35px}.w2{left:155px}
+</style>
+</head>
+<body>
+<h1>jQuery Actions</h1>
+
+<section>
+<h3>1. Budget Calculator</h3>
+<label>Total Amount (₹):</label>
+<input type="number" id="amount" placeholder="Enter amount"><br>
+<label>Room Rent (%):</label>
+<input type="number" id="rent" value="30"><br>
+<label>Accessories (%):</label>
+<input type="number" id="access" value="20"><br>
+<label>Emergency (%):</label>
+<input type="number" id="emergency" value="10"><br>
+<label>Savings (%):</label>
+<input type="number" id="saving" value="40"><br>
+<button id="evaluate">Evaluate My Money</button>
+<div class="result" id="budgetResult">Your budget details appear here.</div>
+</section>
+
+<section>
+<h3>2. Cake Order Calculator</h3>
+<label>Cake Size:</label>
+<select id="size">
+<option value="100">0.5 kg - ₹100</option>
+<option value="200">1 kg - ₹200</option>
+<option value="400">2 kg - ₹400</option>
+</select><br>
+<label>Quantity:</label>
+<input type="number" id="qty" value="1" min="1"><br>
+<label>Tip:</label>
+<select id="tip">
+<option value="10">10%</option>
+<option value="15">15%</option>
+<option value="20">20%</option>
+</select><br>
+<button id="cakeBtn">Calculate Order</button>
+<div class="result" id="cakeResult">Order total appears here.</div>
+</section>
+
+<section>
+<h3>3. Car Body Workshop</h3>
+<p>Change the body and glass colours of the car.</p>
+<label>Car Body:</label>
+<input type="color" id="bodyColor" value="#ff0000"><br>
+<label>Glass:</label>
+<input type="color" id="glassColor" value="#add8e6"><br>
+<div id="car">
+<div class="body"></div>
+<div class="glass"></div>
+<div class="wheel w1"></div>
+<div class="wheel w2"></div>
+</div>
+<button id="resetCar">Reset Car</button>
+</section>
+
+<script>
+$(document).ready(function(){
+
+// 1. Budget Calculator
+$("#evaluate").click(function(){
+ let amount=Number($("#amount").val());
+ let rent=Number($("#rent").val());
+ let access=Number($("#access").val());
+ let emergency=Number($("#emergency").val());
+ let saving=Number($("#saving").val());
+ let total=rent+access+emergency+saving;
+
+ if(amount<=0 || !$("#amount").val()){
+  alert("Please enter a valid amount!");
+  return;
+ }
+ if([rent,access,emergency,saving].some(x=>x<0) || total!==100){
+  alert("Enter valid percentages that add up to 100%!");
+  return;
+ }
+ let r=amount*rent/100;
+ let a=amount*access/100;
+ let e=amount*emergency/100;
+ let s=amount*saving/100;
+
+ $("#budgetResult").html(
+  "Room Rent: ₹"+r.toFixed(2)+"<br>"+
+  "Accessories: ₹"+a.toFixed(2)+"<br>"+
+  "Emergency: ₹"+e.toFixed(2)+"<br>"+
+  "Savings: ₹"+s.toFixed(2)+"<br>"+
+  "<b>Total: ₹"+(r+a+e+s).toFixed(2)+"</b>"
+ );
+});
+
+// 2. Cake Order Calculator
+$("#cakeBtn").click(function(){
+ let price=Number($("#size").val());
+ let qty=Number($("#qty").val());
+ let tip=Number($("#tip").val());
+
+ if(qty<1 || !Number.isInteger(qty)){
+  alert("Enter a valid whole-number quantity!");
+  return;
+ }
+ let subtotal=price*qty;
+ let tax=subtotal*0.09;
+ let tipAmount=subtotal*tip/100;
+ let total=subtotal+tax+tipAmount;
+
+ $("#cakeResult").html(
+  "Cake Price: ₹"+subtotal.toFixed(2)+"<br>"+
+  "Tax (9%): ₹"+tax.toFixed(2)+"<br>"+
+  "Tip ("+tip+"%): ₹"+tipAmount.toFixed(2)+"<br>"+
+  "<b>Total Amount: ₹"+total.toFixed(2)+"</b>"
+ );
+});
+
+// 3. Car Body Workshop
+$("#bodyColor").on("input change",function(){
+ $(".body").css("background-color",$(this).val());
+});
+$("#glassColor").on("input change",function(){
+ $(".glass").css("background-color",$(this).val());
+});
+$("#resetCar").click(function(){
+ $(".body").css("background-color","red");
+ $(".glass").css("background-color","lightblue");
+ $("#bodyColor").val("#ff0000");
+ $("#glassColor").val("#add8e6");
+});
+
+});
+</script>
+</body>
+</html>

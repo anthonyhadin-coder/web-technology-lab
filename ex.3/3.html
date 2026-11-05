@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony Hadin - HTML5 and CSS3</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 10px;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    color: #222;
+    background-color: lightblue;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+}
+
+header {
+    background: navy;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+header h1 {
+    font-size: 23px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px blue;
+    margin: 3px;
+}
+
+header h2 {
+    margin: 3px;
+    font-size: 16px;
+}
+
+header p {
+    margin: 3px;
+    font-style: italic;
+}
+
+h3 {
+    font-size: 14px;
+    color: darkblue;
+    margin: 5px 0;
+}
+
+p {
+    margin: 5px 0;
+}
+
+.normal {
+    background: #eff6ff;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-left: 4px solid blue;
+}
+
+.normal h2 {
+    font-size: 15px;
+    color: green;
+    text-decoration: underline;
+    margin: 0 0 5px;
+}
+
+.columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.card {
+    padding: 8px;
+    background: #f3e8ff;
+    border: 1px solid #a78bfa;
+    border-radius: 5px;
+    min-width: 0;
+}
+
+.card h3 {
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+ul {
+    margin: 4px 0;
+    padding-left: 20px;
+    list-style-type: circle;
+}
+
+a:link {
+    color: blue;
+    background: yellow;
+}
+
+a:visited {
+    color: purple;
+}
+
+a:hover {
+    background: lightgreen;
+}
+
+a:active {
+    background: hotpink;
+}
+
+.demo {
+    width: 50%;
+    height: 45px;
+    padding: 5px;
+    margin: 5px auto;
+    display: block;
+    background: lightgreen;
+    text-align: center;
+    border: 1px solid green;
+}
+
+.inline {
+    display: inline;
+    background: lightyellow;
+}
+
+img {
+    width: 100%;
+    height: 65px;
+    object-fit: cover;
+    display: block;
+}
+
+footer {
+    background: navy;
+    color: white;
+    text-align: center;
+    padding: 6px;
+}
+
+@media (max-width: 600px) {
+    .columns {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 19px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- Header -->
+<header>
+    <h1>HTML5 AND CSS3 SHOWCASE</h1>
+    <h2>Anthony Hadin</h2>
+    <p>Web Development Practical Experiment</p>
+</header>
+
+<!-- Normal Flow -->
+<section class="normal">
+    <h2>Normal Flow Layout</h2>
+    <p>
+        Hello! I am Anthony Hadin, a Computer Science student specializing
+        in AI and Machine Learning. HTML5 creates webpage structure, while
+        CSS3 styles elements using margins, padding, fonts, colours, and layouts.
+    </p>
+</section>
+
+<!-- Multicolumn Layout -->
+<div class="columns">
+
+    <!-- HTML5 Card -->
+    <section class="card">
+        <h3>HTML5</h3>
+        <p>HTML5 creates webpages using headings, paragraphs, images, links,
+        lists, tables, and multimedia elements.</p>
+        <img src="https://placehold.co/300x100/1e40af/ffffff?text=HTML5"
+             alt="HTML5 example">
+    </section>
+
+    <!-- CSS3 Card -->
+    <section class="card">
+        <h3>CSS3 Properties</h3>
+        <p style="color:green; letter-spacing:1px; text-align:center;">
+            Text Formatting
+        </p>
+        <p style="font-style:italic; font-weight:bold;">
+            Font Style and Weight
+        </p>
+        <p style="text-shadow:1px 1px 2px skyblue;">
+            Text Shadow Effect
+        </p>
+        <p style="background-color:lightyellow; padding:5px;">
+            Background and Padding
+        </p>
+    </section>
+
+    <!-- Skills Card -->
+    <section class="card">
+        <h3>My Skills</h3>
+        <ul>
+            <li>HTML and CSS</li>
+            <li>Python Programming</li>
+            <li>AI and Machine Learning</li>
+            <li>Web Development</li>
+        </ul>
+        <p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+                Learn CSS
+            </a>
+        </p>
+    </section>
+
+</div>
+
+<!-- Display, Height and Width -->
+<section class="normal">
+    <h2>Display, Height and Width</h2>
+    <div class="demo">Block Element: 50% Width, 45px Height</div>
+    <p>Example of an <span class="inline">inline element</span> inside a paragraph.</p>
+</section>
+
+<!-- Margin and Padding -->
+<section class="normal">
+    <h2>Margin and Padding</h2>
+    <p style="margin:8px 15px; padding:6px; background:#dbeafe;">
+        Margin creates space outside an element; padding creates space inside it.
+    </p>
+</section>
+
+<!-- Links -->
+<section class="normal">
+    <h2>CSS Link States</h2>
+    <a href="https://www.google.com">Google</a>
+    <a href="https://www.github.com">GitHub</a>
+    <a href="https://developer.mozilla.org/">MDN</a>
+    <p>Hover over a link to see its background colour change.</p>
+</section>
+
+<!-- Footer -->
+<footer>
+    Created by Anthony Hadin | HTML5 and CSS3 Practical | 2026
+</footer>
+
+</div>
+</body>
+</html>

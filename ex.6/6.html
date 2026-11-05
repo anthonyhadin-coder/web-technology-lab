@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Practical</title>
+<style>
+body{font-family:Arial;margin:15px;background:#f1f5f9;color:#172554}
+h1{text-align:center;color:#1d4ed8;font-size:25px}
+section{background:white;padding:12px;margin:10px 0;border-radius:10px}
+button{padding:7px 12px;margin:4px;cursor:pointer}
+#car{position:relative;left:0;font-size:30px}
+#para1{font-size:18px;transition:.2s}
+</style>
+</head>
+<body>
+<h1>JavaScript Timing Events & Objects</h1>
+
+<section>
+<h3>1. Digital Clock</h3>
+<h2 id="time"></h2>
+</section>
+
+<section>
+<h3>2. Dynamic Background</h3>
+<p>Background changes every 30 seconds.</p>
+<button onclick="setBackgroundColor()">Change Now</button>
+</section>
+
+<section>
+<h3>3. Mouse Events</h3>
+<p id="para1" onmouseover="incSize()" onmouseout="decSize()">
+Move your mouse over this paragraph to zoom in!
+</p>
+</section>
+
+<section>
+<h3>4. Move the Car</h3>
+<div id="car">🚗</div>
+<button onclick="moveRight()">Move</button>
+<button onclick="stopCar()">Stop</button>
+</section>
+
+<section>
+<h3>5. Student Objects</h3>
+<div id="students"></div>
+</section>
+
+<section>
+<h3>Date Object Details</h3>
+<p id="date"></p>
+</section>
+
+<script>
+// 1. Digital Clock
+function display(){
+ let d=new Date();
+ document.getElementById("time").textContent=
+ d.getHours().toString().padStart(2,"0")+":"+
+ d.getMinutes().toString().padStart(2,"0")+":"+
+ d.getSeconds().toString().padStart(2,"0");
+}
+display();
+setInterval(display,1000);
+
+// 2. Change Background Color
+function setBackgroundColor(){
+ let red=Math.floor(Math.random()*256);
+ let green=Math.floor(Math.random()*256);
+ let blue=Math.floor(Math.random()*256);
+ document.body.style.backgroundColor=
+ `rgb(${red},${green},${blue})`;
+}
+setInterval(setBackgroundColor,30000);
+
+// 3. Mouse Events
+function incSize(){
+ document.getElementById("para1").style.fontSize="28px";
+}
+function decSize(){
+ document.getElementById("para1").style.fontSize="18px";
+}
+
+// 4. Move and Stop Car
+let car=document.getElementById("car");
+let animation=null;
+function moveRight(){
+ if(animation!==null) return;
+ function move(){
+  car.style.left=(parseInt(car.style.left)||0)+2+"px";
+  animation=setTimeout(move,20);
+ }
+ move();
+}
+function stopCar(){
+ clearTimeout(animation);
+ animation=null;
+ car.style.left="0px";
+}
+
+// 5. Array of Student Objects
+let student=[
+ {name:"John",regno:"UR13CS129",year:1995},
+ {name:"Joseph",regno:"UR13CS456",year:1998},
+ {name:"Anu",regno:"UR23CS101",year:2003},
+ {name:"Ravi",regno:"UR24CS205",year:2005}
+];
+let output="";
+student.forEach(s=>{
+ output+=`<p>${s.name}'s Register Number is ${s.regno}<br>
+ Year of Birth: ${s.year} — 
+ ${s.year<2000?"Born before 2000":"Born in/after 2000"}</p>`;
+});
+document.getElementById("students").innerHTML=output;
+
+// Date Object
+let d=new Date();
+document.getElementById("date").textContent=
+ "Date: "+d.getDate()+
+ " | Day (0-6): "+d.getDay()+
+ " | Month (0-11): "+d.getMonth()+
+ " | Year: "+d.getFullYear()+
+ " | Time: "+d.toTimeString();
+</script>
+</body>
+</html>

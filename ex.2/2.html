@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony Hadin - HTML5 Showcase</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.3;
+    background: linear-gradient(135deg, #dbeafe, #f3e8ff);
+    color: #263238;
+}
+
+.container {
+    max-width: 1400px;
+    width: 100%;
+    margin: auto;
+    background: white;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0002;
+}
+
+header {
+    text-align: center;
+    padding: 10px;
+    color: white;
+    background: linear-gradient(120deg, #4338ca, #9333ea);
+    border-radius: 8px;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 2px;
+}
+
+header h2 {
+    color: white;
+    font-size: 16px;
+    margin: 3px;
+}
+
+header p {
+    margin: 3px;
+}
+
+h2 {
+    font-size: 15px;
+    color: #4338ca;
+    margin: 0 0 6px;
+}
+
+h3 {
+    font-size: 13px;
+    margin: 4px 0;
+}
+
+p {
+    margin: 4px 0;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+section {
+    padding: 9px;
+    border-radius: 7px;
+    border: 1px solid #dbeafe;
+    background: #f8fafc;
+    min-width: 0;
+}
+
+.ad {
+    text-align: center;
+    background: #dcfce7;
+    border-color: #86efac;
+}
+
+.ad h2 {
+    color: #166534;
+}
+
+.ad a {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #15803d;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4px;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+th {
+    color: white;
+    background: #4f46e5;
+}
+
+fieldset {
+    padding: 6px;
+    margin: 4px 0;
+    border: 1px solid #c7d2fe;
+    border-radius: 5px;
+}
+
+legend {
+    color: #4338ca;
+    font-weight: bold;
+}
+
+label {
+    display: inline-block;
+}
+
+input, select {
+    font-size: 11px;
+    max-width: 100%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="tel"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 4px;
+    margin: 2px 0 4px;
+    border: 1px solid #cbd5e1;
+    border-radius: 3px;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    padding: 5px 12px;
+    border: 0;
+    border-radius: 4px;
+    background: #4f46e5;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="reset"] {
+    background: #64748b;
+}
+
+audio {
+    width: 100%;
+    height: 32px;
+}
+
+video {
+    display: block;
+    width: 100%;
+    max-height: 100px;
+    background: #111;
+}
+
+iframe {
+    display: block;
+    width: 100%;
+    height: 110px;
+    border: 1px solid #c7d2fe;
+    border-radius: 5px;
+    background: white;
+}
+
+footer {
+    text-align: center;
+    margin-top: 8px;
+    padding: 6px;
+    background: #312e81;
+    color: white;
+    border-radius: 5px;
+}
+
+@media (max-width: 650px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+}
+
+@media print {
+    body {
+        padding: 0;
+        background: white;
+        font-size: 9px;
+    }
+
+    .container {
+        box-shadow: none;
+        max-width: none;
+    }
+
+    section {
+        break-inside: avoid;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- Header Section -->
+<header>
+    <h1>My HTML5 Showcase Page</h1>
+    <h2>Anthony Hadin</h2>
+    <p>HTML5 Elements, Multimedia and College Advertisement</p>
+</header>
+
+<div class="layout">
+
+<!-- LEFT COLUMN -->
+<div class="column">
+
+    <!-- Purpose Section -->
+    <section>
+        <h2>About This Page</h2>
+        <p>
+            Welcome to my HTML5 Showcase Page. This page demonstrates
+            important HTML5 elements. It includes images, tables, forms,
+            and multimedia. It also presents a college advertisement
+            and an embedded website.
+        </p>
+    </section>
+
+    <!-- Image Section -->
+    <section>
+        <h2>HTML5 Showcase Image</h2>
+        <img src="https://placehold.co/800x180/4f46e5/ffffff?text=HTML5+Showcase"
+             alt="HTML5 Showcase Image">
+    </section>
+
+    <!-- College Advertisement -->
+    <section class="ad">
+        <h2>College Advertisement</h2>
+        <h3>Karunya Institute of Technology and Sciences</h3>
+        <p>Learn, Innovate and Build Your Future!</p>
+        <a href="https://www.karunya.edu/" target="_blank">
+            Visit College Website
+        </a>
+    </section>
+
+    <!-- HTML Table -->
+    <section>
+        <h2>HTML Elements Table</h2>
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Category</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>&lt;h1&gt;</td>
+                <td>Heading</td>
+                <td>Main heading</td>
+            </tr>
+            <tr>
+                <td>&lt;p&gt;</td>
+                <td>Text</td>
+                <td>Paragraph</td>
+            </tr>
+            <tr>
+                <td>&lt;img&gt;</td>
+                <td>Image</td>
+                <td>Displays an image</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Audio Player -->
+    <section>
+        <h2>Audio Player</h2>
+        <audio controls>
+            <source src="https://www.w3schools.com/html/horse.mp3"
+                    type="audio/mpeg">
+        </audio>
+    </section>
+
+</div>
+
+<!-- RIGHT COLUMN -->
+<div class="column">
+
+    <!-- Student Registration Form -->
+    <section>
+        <h2>Student Registration Form</h2>
+
+        <form action="#" method="get">
+
+            <fieldset>
+                <legend>Personal Information</legend>
+
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name"
+                       placeholder="Enter your name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"
+                       placeholder="Enter your email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone">
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="16" max="100">
+
+                <label for="photo">Upload Photo:</label>
+                <input type="file" id="photo" name="photo">
+            </fieldset>
+
+            <fieldset>
+                <legend>Course Preferences</legend>
+
+                <input type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label>
+
+                <input type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label>
+
+                <br>
+
+                <label for="course">Choose Course:</label>
+                <select id="course" name="course">
+                    <option value="cse">Computer Science</option>
+                    <option value="aiml">AI and Machine Learning</option>
+                    <option value="ece">Electronics</option>
+                    <option value="mech">Mechanical Engineering</option>
+                </select>
+
+                <input type="checkbox" id="agree" name="agree" required>
+                <label for="agree">I agree to the terms</label>
+            </fieldset>
+
+            <label for="progress">Registration Progress:</label>
+            <progress id="progress" value="70" max="100"></progress>
+            <span>70%</span>
+            <br><br>
+
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </form>
+    </section>
+
+    <!-- Video Player -->
+    <section>
+        <h2>Video Player</h2>
+        <video controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4"
+                    type="video/mp4">
+            Your browser does not support video.
+        </video>
+    </section>
+
+    <!-- Media File Link -->
+    <section>
+        <h2>Media File Link</h2>
+        <a href="https://www.w3schools.com/html/mov_bbb.mp4"
+           target="_blank">Open Video File</a>
+    </section>
+
+    <!-- Embedded Website: Not W3Schools -->
+    <section>
+        <h2>Embedded Website</h2>
+        <iframe src="https://example.com"
+                title="Example.com Embedded Website">
+        </iframe>
+        <p><a href="https://example.com" target="_blank">
+            Open Website Separately
+        </a></p>
+    </section>
+
+</div>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    Created by Anthony Hadin | HTML5 Showcase Assignment | 2026
+</footer>
+
+</div>
+</body>
+</html>
