@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 10 - User Registration</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f1f5f9; color: #1e293b; }
+    header { background: #172554; color: white; text-align: center; padding: 22px; position: relative; }
+    header h1 { margin: 0 0 8px; }
+    .student-info { position: absolute; top: 12px; right: 16px; text-align: right; font-size: 12px; line-height: 1.6; }
+    .container { max-width: 650px; margin: 30px auto; padding: 0 16px; }
+    .card { background: white; padding: 28px; border-radius: 12px; box-shadow: 0 4px 16px #00000012; }
+    h2 { text-align: center; color: #1d4ed8; margin-top: 0; }
+    label { display: block; margin: 15px 0 6px; font-size: 14px; font-weight: bold; }
+    .required { color: #dc2626; }
+    input:not([type="radio"]):not([type="checkbox"]), select {
+      width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 5px; font-size: 14px;
+    }
+    .choices { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 8px; }
+    .choices label { font-weight: normal; margin: 0; }
+    button { display: block; width: 100%; margin-top: 24px; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; }
+    button:hover { background: #1e40af; }
+    footer { margin-top: 30px; background: #172554; color: white; text-align: center; padding: 18px; }
+    @media (max-width: 600px) {
+      .student-info { position: static; text-align: center; margin-bottom: 12px; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="student-info"><strong>ANTHONY HADIN</strong><br>URK24CS9018</div>
+  <h1>WEB TECHNOLOGY LAB</h1>
+  <p>Experiment No. 10</p>
+  <p>HTML Form Request Handling Using Node.js and MongoDB</p>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>User Registration Form</h2>
+    <form action="/server" method="POST">
+      <label for="name">Name <span class="required">*</span></label>
+      <input type="text" id="name" name="name" required pattern="[A-Za-z ]+" title="Enter letters and spaces only">
+
+      <label for="password">Password <span class="required">*</span></label>
+      <input type="password" id="password" name="password" required minlength="8"
+             pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
+             title="Minimum 8 characters with uppercase, lowercase and a number">
+
+      <label for="age">Age <span class="required">*</span></label>
+      <input type="number" id="age" name="age" required min="18" max="100" step="1">
+
+      <label for="mobile">Mobile Number <span class="required">*</span></label>
+      <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" maxlength="10" title="Enter exactly 10 digits">
+
+      <label for="email">Email <span class="required">*</span></label>
+      <input type="email" id="email" name="email" required>
+
+      <label>Gender <span class="required">*</span></label>
+      <div class="choices">
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female" required> Female</label>
+      </div>
+
+      <label for="state">State <span class="required">*</span></label>
+      <select id="state" name="state" required>
+        <option value="">-- Select State --</option>
+        <option>Tamil Nadu</option><option>Kerala</option><option>Karnataka</option>
+        <option>Andhra Pradesh</option><option>Telangana</option><option>Maharashtra</option><option>Other</option>
+      </select>
+
+      <label>Skills <span class="required">*</span></label>
+      <div class="choices">
+        <label><input type="checkbox" name="skills" value="JavaScript"> JavaScript</label>
+        <label><input type="checkbox" name="skills" value="Python"> Python</label>
+        <label><input type="checkbox" name="skills" value="C++"> C++</label>
+        <label><input type="checkbox" name="skills" value="Java"> Java</label>
+      </div>
+
+      <button type="submit">Submit Registration</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <p>Anthony Hadin | URK24CS9018</p>
+  <p>Web Technology Lab - Experiment 10</p>
+</footer>
+</body>
+</html>
