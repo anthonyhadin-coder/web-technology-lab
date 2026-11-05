@@ -1,0 +1,14 @@
+{
+  "name": "web-technology-experiment-10",
+  "version": "1.0.0",
+  "description": "HTML form request handling using Node.js and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.22.3",
+    "mongodb": "^6.22.0"
+  }
+}
